@@ -6,7 +6,14 @@
 }
 
 <h2>Index</h2>
-
+@{ Html.BeginForm("Index", "Category", FormMethod.Get);}
+@Html.TextBox("search")
+<button type="submit">Search</button>
+@{ Html.EndForm();}
+<p>
+    @Html.ActionLink("Sort by Name ASC", "Index", new { sortOrder = "asc" })
+    @Html.ActionLink("Sort by Name DESC", "Index", new { sortOrder = "desc" })
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

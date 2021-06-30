@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+namespace T2004E_WAD.Models
+{
+    public class Order // tạo đặt hàng với thông tin người đặt
+    {
+        [Key]
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Telephone { get; set; }
+        public String Address { get; set; }
+        public decimal GrandTotal { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int Status { get; set; }
+    }
+}

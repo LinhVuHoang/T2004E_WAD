@@ -1,8 +1,9 @@
-﻿@model T2004E_WAD.Models.Category
+﻿@model dynamic
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    T2004E_WAD.Models.Category category = Model.Category;
 }
 
 <h2>Details</h2>
@@ -12,32 +13,76 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NameC)
+            NameC
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NameC)
+           @category.NameC
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
+            Image
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Image)
+           @category.Image
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+           @category.Description
         </dd>
 
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            NameP
+        </th>
+        <th>
+            NameB
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    @foreach(T2004E_WAD.Models.Product item in Model.Products)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NameP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Brand.NameB)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Image)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", "Product", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", "Product", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", "Product", new { id = item.Id })
+    </td>
+</tr>
+            }
+</table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = category.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

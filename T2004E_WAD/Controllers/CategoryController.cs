@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using T2004E_WAD.Context;
 using T2004E_WAD.Models;
-
+using System.Dynamic;
 namespace T2004E_WAD.Controllers
 {
     public class CategoryController : Controller
@@ -16,9 +16,20 @@ namespace T2004E_WAD.Controllers
         private DataContext db = new DataContext();
 
         // GET: Category
-        public ActionResult Index()
+        public ActionResult Index(string search,string sortOrder)
         {
-            return View(db.Categories.ToList());
+            string sort = !String.IsNullOrEmpty(sortOrder) ? sortOrder : "asc";
+            var categories = from p in db.Categories select p;
+            if (!String.IsNullOrEmpty(search))
+            {
+                categories = categories.Where(p => p.NameC.Contains(search));
+            }
+            switch (sort)
+            {
+                case "asc": categories = categories.OrderBy(p => p.NameC); break;
+                case "desc": categories = categories.OrderByDescending(p => p.NameC); break;
+            }
+            return View(categories);
         }
 
         // GET: Category/Details/5
@@ -33,7 +44,10 @@ namespace T2004E_WAD.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            dynamic data = new ExpandoObject();
+            data.Category = category;
+            data.Products = db.Products.Where(p => p.CategoryID == category.Id).ToList();
+            return View(data);
         }
 
         // GET: Category/Create

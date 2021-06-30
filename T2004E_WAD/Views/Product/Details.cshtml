@@ -62,6 +62,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.Id, qty = 1 })
     @Html.ActionLink("Back to List", "Index")
 </p>

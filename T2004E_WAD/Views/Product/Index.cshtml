@@ -1,4 +1,4 @@
-﻿@model IEnumerable<T2004E_WAD.Models.Product>
+﻿@model dynamic
 
 @{
     ViewBag.Title = "Index";
@@ -6,34 +6,49 @@
 }
 
 <h2>Index</h2>
-
+@{ Html.BeginForm("Index", "Product", FormMethod.Get);}
+@Html.TextBox("search")
+<select name="categoryId" class="form-control">
+    <option value="">Select category</option>
+    @foreach(T2004E_WAD.Models.Category item in Model.Categories)
+            {
+                <option @(ViewBag.CategoryId == item.Id ?"selected":"") value="@item.Id">@item.NameC</option>
+            }
+</select>
+<button type="submit">Search</button>
+@{ Html.EndForm();}
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Sort by NameP ASC", "Index", new { sortOrder = "asc" })
+    @Html.ActionLink("Sort by NameP DESC", "Index", new { sortOrder = "desc" })
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Brand.NameB)
+            NameB
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.NameC)
+           NameC
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NameP)
+           NameP
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (T2004E_WAD.Models.Product item in Model.Products) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Brand.NameB)
