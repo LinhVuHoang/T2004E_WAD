@@ -11,8 +11,6 @@ namespace T2004E_WAD.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tên danh mục")]
         public string NameC { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng nhập ảnh danh mục")]
         public string Image { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập mô tả danh mục")]
         public string Description { get; set; }

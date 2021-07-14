@@ -12,7 +12,7 @@ namespace T2004E_WAD.Models
         public int Id { get; set; }
         [Required]
         public string NameB { get; set; }
-        [Required]
+   
         public string Image { get; set; }
         [Required]
         public string Description { get; set; }

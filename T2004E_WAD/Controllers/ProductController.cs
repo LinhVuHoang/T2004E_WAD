@@ -110,13 +110,14 @@ namespace T2004E_WAD.Controllers
                                                    // như Database. Điều đặc biệt ở đây các chức năng đăng xuất, đăng nhập
                                                    // người dùng sẽ rất khó mà thực hiện nổi, nếu không sử dụng session
                                                    // tạo 1 tập tin lưu dữ liệu của Cart
+                                                   //lúc đầu chưa có dữ liệu với Session Cart sau gán biến cart của Cart.cs để làm dữ liệu session mới
                 if (cart == null)
                 {
                     return HttpNotFound();
 
                 }
                 cart.RemoveItem((int)id);
-                Session["cart"] = cart;//thêm session
+                Session["cart"] = cart;//thêm session mới tên cart với biển cart có dữ liệu mới tạo ra 1 session mới 
             }catch(Exception e)
             {
                 return HttpNotFound();

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using T2004E_WAD.Context;
+using System.IO;
 using T2004E_WAD.Models;
 
 namespace T2004E_WAD.Controllers
@@ -47,8 +48,19 @@ namespace T2004E_WAD.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NameB,Image,Description")] Brand brand)
+        public ActionResult Create([Bind(Include = "Id,NameB,Description")] Brand brand, HttpPostedFileBase Image)
         {
+            String categoryImage = "default.png";
+            //upload file lên thư mục uploads
+            //lưu tên file vào categoryImage
+            if (Image != null)
+            {
+                string fileName = Path.GetFileName(Image.FileName);
+                string path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+                Image.SaveAs(path);//Lưu file xong
+                categoryImage = "Uploads" + fileName;
+            }
+            brand.Image = categoryImage;
             if (ModelState.IsValid)
             {
                 db.Brands.Add(brand);
